@@ -1,0 +1,455 @@
+
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кыргызстандын таш жана коло доору</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+ --bg:#11120e;
+ --panel:#24251b;
+ --stone:#b8a68b;
+ --gold:#d3a45e;
+ --bronze:#a86d38;
+ --white:#f4eddf;
+ --muted:#b5ad9e;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;background:var(--bg);color:var(--white);
+ font-family:Manrope,sans-serif;overflow:hidden;
+}
+.deck{
+ height:100vh;width:100%;position:relative;overflow:hidden;
+ background:
+ radial-gradient(ellipse at 85% 15%,#a86d382b,transparent 42%),
+ radial-gradient(ellipse at 5% 90%,#77705b25,transparent 40%),
+ #11120e;
+}
+.deck:before{
+ content:"";position:absolute;inset:12px;
+ border:1px solid #d3a45e55;
+ z-index:10;pointer-events:none;
+}
+.slide{
+ position:absolute;inset:0;
+ padding:65px 9% 100px;
+ display:flex;flex-direction:column;justify-content:center;
+ opacity:0;visibility:hidden;
+ transform:translateY(35px) scale(.98);
+ transition:.65s ease;overflow-y:auto;
+}
+.slide.active{
+ opacity:1;visibility:visible;
+ transform:translateY(0) scale(1);
+}
+.slide.active .reveal{animation:reveal .8s both}
+.slide.active .d1{animation-delay:.15s}
+.slide.active .d2{animation-delay:.3s}
+.slide.active .d3{animation-delay:.45s}
+.slide.active .d4{animation-delay:.6s}
+
+@keyframes reveal{
+ from{opacity:0;transform:translateY(35px)}
+ to{opacity:1;transform:translateY(0)}
+}
+@keyframes float{
+ 0%,100%{transform:translateY(0)}
+ 50%{transform:translateY(-12px)}
+}
+@keyframes zoom{
+ from{transform:scale(1.15)}
+ to{transform:scale(1)}
+}
+@keyframes rotate{
+ to{transform:rotate(360deg)}
+}
+h1,h2,h3{font-family:'Playfair Display',serif;margin:0}
+h1{
+ font-size:clamp(65px,9vw,120px);
+ line-height:.94;
+}
+h2{
+ font-size:clamp(38px,5vw,67px);
+ margin-bottom:25px;
+}
+h3{font-size:25px;color:var(--gold);margin-bottom:10px}
+p{font-size:15px;line-height:1.8;color:#d0c9bb}
+.gold{color:var(--gold)}
+.bronze{color:#cf9254}
+.eyebrow{
+ color:var(--gold);font-size:11px;
+ letter-spacing:5px;margin-bottom:22px;
+}
+.tag{
+ display:inline-block;padding:8px 14px;
+ border:1px solid #d3a45e77;
+ color:var(--gold);font-size:10px;letter-spacing:2px;
+}
+.top{
+ display:flex;justify-content:space-between;
+ align-items:center;margin-bottom:22px;
+}
+.hero{
+ display:grid;grid-template-columns:1.1fr .9fr;
+ align-items:center;gap:50px;
+}
+.heroimg{
+ width:100%;height:460px;object-fit:cover;
+ border-radius:5px 65px 5px 5px;
+ border:1px solid #d3a45e77;
+ box-shadow:18px 18px 0 #a86d382b;
+ animation:float 6s ease-in-out infinite;
+}
+.subtitle{
+ color:var(--gold);font-size:16px;
+ letter-spacing:4px;margin-top:20px;
+}
+.author{font-size:12px;color:var(--muted);margin-top:40px}
+.layout{
+ display:grid;grid-template-columns:1fr 1fr;
+ align-items:center;gap:28px;
+}
+.photo{
+ width:100%;height:300px;object-fit:cover;
+ border:1px solid #d3a45e77;
+ border-radius:4px 35px 4px 4px;
+ transition:.5s;
+}
+.photo:hover{transform:scale(1.03)}
+.caption{
+ color:#a89c83;font-size:10px;
+ letter-spacing:2px;margin-top:10px;
+}
+.cards{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:16px;
+}
+.card{
+ padding:22px;
+ background:linear-gradient(145deg,#29291f,#1b1c15);
+ border:1px solid #d3a45e35;
+ border-radius:5px;
+ transition:.35s;
+}
+.card:hover{
+ transform:translateY(-8px);
+ border-color:var(--gold);
+}
+.num{
+ font-family:'Playfair Display';
+ font-size:45px;color:var(--gold);
+ margin-bottom:8px;
+}
+.card p{font-size:13px}
+.box{
+ background:linear-gradient(120deg,#352b20,#202119);
+ padding:23px;border-left:3px solid var(--bronze);
+ margin-top:20px;
+}
+.box p{margin:5px 0}
+.timeline{
+ display:grid;grid-template-columns:90px 1fr;
+ gap:15px;margin:18px 0;
+ align-items:start;
+}
+.timeline b{
+ color:var(--gold);font-size:22px;
+ font-family:'Playfair Display';
+}
+.timeline p{margin:0}
+.bigquote{
+ font-family:'Playfair Display';
+ font-size:clamp(25px,3vw,38px);
+ line-height:1.4;color:#e4c99a;
+}
+.compare{
+ display:grid;grid-template-columns:1fr 1fr;
+ gap:15px;margin-top:15px;
+}
+.compare div{
+ padding:20px;background:#29291f;
+ border:1px solid #b88a4e44;
+}
+.compare p{font-size:13px}
+.final{text-align:center;max-width:850px;margin:auto}
+.final h2{font-size:clamp(50px,8vw,90px)}
+.final p{max-width:650px;margin:20px auto}
+.final .thanks{
+ color:var(--gold);font-family:'Playfair Display';
+ font-size:clamp(22px,4vw,35px);margin-top:35px;
+}
+.nav{
+ position:absolute;bottom:23px;left:9%;right:9%;
+ display:flex;align-items:center;gap:17px;z-index:20;
+}
+.counter{color:var(--gold);font-size:12px}
+.track{height:3px;background:#4a4436;flex:1}
+.fill{height:100%;background:var(--gold);width:14.28%;transition:.5s}
+.controls{display:flex;gap:8px}
+button{
+ background:#29291f;color:var(--gold);
+ border:1px solid #d3a45e88;
+ padding:10px 17px;cursor:pointer;font-size:17px;
+ transition:.3s;
+}
+button:hover{background:var(--gold);color:#11120e}
+.hint{
+ position:absolute;right:9%;top:30px;
+ color:#938c7b;font-size:10px;letter-spacing:2px;
+}
+@media(max-width:750px){
+ .slide{padding:55px 8% 100px}
+ .hero,.layout{grid-template-columns:1fr;gap:20px}
+ .heroimg{height:220px;max-width:380px}
+ .cards{grid-template-columns:1fr}
+ .card{padding:15px}
+ .card .num{font-size:30px}
+ h1{font-size:70px}
+ h2{font-size:42px}
+ h3{font-size:22px}
+ p{font-size:13px}
+ .photo{height:200px}
+ .hint{display:none}
+ .nav{left:8%;right:8%}
+ .timeline{grid-template-columns:75px 1fr}
+ .compare{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+<div class="deck">
+
+<!-- СЛАЙД 1 -->
+<section class="slide active">
+ <div class="top">
+  <span class="eyebrow">КЫРГЫЗСТАНДЫН ТАРЫХЫ</span>
+  <span class="tag">01 / 07</span>
+ </div>
+ <div class="hero">
+  <div>
+   <div class="eyebrow reveal">БАЙЫРКЫ МЕЗГИЛ</div>
+   <h1 class="reveal d1">ТАШ<br><span class="gold">ЖАНА</span><br><span class="bronze">КОЛО</span><br>ДООРУ</h1>
+   <div class="subtitle reveal d2">КЫРГЫЗСТАНДЫН БАЙЫРКЫ ТАРЫХЫ</div>
+   <p class="reveal d3">Алгачкы адамдардын жашоосу, эмгек куралдары жана байыркы маданияттын өнүгүшү.</p>
+   <div class="author reveal d4">ДАЯРДАГАН: __________________</div>
+  </div>
+  <div class="reveal d2">
+   <img class="heroimg" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1000" alt="Байыркы тоолор">
+   <div class="caption">БАЙЫРКЫ КЫРГЫЗ ЖЕРИ</div>
+  </div>
+ </div>
+</section>
+
+<!-- СЛАЙД 2 -->
+<section class="slide">
+ <div class="top">
+  <span class="eyebrow">АЛГАЧКЫ АДАМДАР</span>
+  <span class="tag">02 / 07</span>
+ </div>
+ <h2 class="reveal">Таш доору <span class="gold">деген эмне?</span></h2>
+ <div class="layout">
+  <div class="reveal d1">
+   <p>Таш доору — адамдар эмгек куралдарын негизинен таштан жасап колдонгон эң байыркы тарыхый мезгил.</p>
+   <p>Кыргызстандын аймагында алгачкы адамдар мындан жүз миңдеген жылдар мурда жашай баштаган.</p>
+   <div class="box">
+    <h3>Алар эмне кылышкан?</h3>
+    <p>• Аңчылык кылышкан.</p>
+    <p>• Жапайы өсүмдүктөрдү жыйнашкан.</p>
+    <p>• Үңкүрлөрдө жана убактылуу турактарда жашашкан.</p>
+    <p>• Таштан жөнөкөй куралдарды жасашкан.</p>
+   </div>
+  </div>
+  <div class="reveal d2">
+   <img class="photo" style="height:370px" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=900" alt="Байыркы жаратылыш">
+   <div class="caption">БАЙЫРКЫ АДАМДАР ЖАШАГАН ЖАРАТЫЛЫШ</div>
+  </div>
+ </div>
+</section>
+
+<!-- СЛАЙД 3 -->
+<section class="slide">
+ <div class="top">
+  <span class="eyebrow">ТАШ ДООРУНУН БАСкычтары</span>
+  <span class="tag">03 / 07</span>
+ </div>
+ <h2 class="reveal">Таш доорунун <span class="gold">үч баскычы</span></h2>
+ <div class="cards">
+  <div class="card reveal d1">
+   <div class="num">01</div>
+   <h3>Палеолит</h3>
+   <p><b class="gold">Байыркы таш доору.</b></p>
+   <p>Адамдар жөнөкөй таш куралдарды жасап, аңчылык жана жыйноочулук менен жашашкан.</p>
+  </div>
+  <div class="card reveal d2">
+   <div class="num">02</div>
+   <h3>Мезолит</h3>
+   <p><b class="gold">Ортоңку таш доору.</b></p>
+   <p>Жаа менен жебе кеңири колдонулуп, майда таш куралдар пайда болгон.</p>
+  </div>
+  <div class="card reveal d3">
+   <div class="num">03</div>
+   <h3>Неолит</h3>
+   <p><b class="gold">Жаңы таш доору.</b></p>
+   <p>Ташты жылмалоо, карапа жасоо жана дыйканчылык өнүгө баштаган.</p>
+  </div>
+ </div>
+ <div class="box reveal d4">
+  <p><b class="gold">Эске тут:</b> Бул үч баскыч адамзаттын жашоосунда чоң өзгөрүүлөрдү алып келген.</p>
+ </div>
+</section>
+
+<!-- СЛАЙД 4 -->
+<section class="slide">
+ <div class="top">
+  <span class="eyebrow">АРХЕОЛОГИЯЛЫК ЭСТЕЛИКТЕР</span>
+  <span class="tag">04 / 07</span>
+ </div>
+ <h2 class="reveal">Кыргызстандагы <span class="gold">байыркы издер</span></h2>
+ <div class="layout">
+  <div class="reveal d1">
+   <div class="timeline">
+    <b>Сел-Үңкүр</b>
+    <p>Баткен аймагындагы байыркы археологиялык эстелик. Бул жерден таш куралдар жана байыркы адамдардын жашоосуна тиешелүү табылгалар чыккан.</p>
+   </div>
+   <div class="timeline">
+    <b>Он-Арча</b>
+    <p>Нарын аймагындагы байыркы адамдардын таш куралдары табылган жерлердин бири.</p>
+   </div>
+   <div class="timeline">
+    <b>Обишир</b>
+    <p>Фергана өрөөнүндөгү мезолит дооруна тиешелүү археологиялык эстеликтер тобу.</p>
+   </div>
+   <div class="box">
+    <p>Бул табылгалар байыркы адамдардын Кыргызстандын аймагында жашаганын далилдейт.</p>
+   </div>
+  </div>
+  <div class="reveal d2">
+   <img class="photo" style="height:370px" src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=900" alt="Байыркы үңкүрлөр жана таштар">
+   <div class="caption">БАЙЫРКЫ ТУРАКТАРГА ОКШОШ ЖАРАТЫЛЫШ</div>
+  </div>
+ </div>
+</section>
+
+<!-- СЛАЙД 5 -->
+<section class="slide">
+ <div class="top">
+  <span class="eyebrow">ЖАҢЫ ТАРЫХЫЙ БАСкыч</span>
+  <span class="tag">05 / 07</span>
+ </div>
+ <h2 class="reveal">Коло доору <span class="bronze">башталат</span></h2>
+ <div class="layout">
+  <div class="reveal d1">
+   <p>Коло доору — адамдар жез менен калайды кошуп, коло деп аталган металлды жасай баштаган мезгил.</p>
+   <p>Кыргызстандын аймагында коло доорунун эстеликтери негизинен биздин заманга чейинки II миң жылдыкта жана I миң жылдыктын башында кездешет.</p>
+   <div class="box">
+    <h3>Колодон эмне жасашкан?</h3>
+    <p>• Бычак жана канжар.</p>
+    <p>• Балта жана найза учтары.</p>
+    <p>• Эмгек шаймандары.</p>
+    <p>• Ар түрдүү кооздук буюмдар.</p>
+   </div>
+  </div>
+  <div class="reveal d2">
+   <img class="photo" style="height:370px" src="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=900" alt="Металл буюмдар">
+   <div class="caption">БАЙЫРКЫ МЕТАЛЛ БУЮМДАРЫ</div>
+  </div>
+ </div>
+</section>
+
+<!-- СЛАЙД 6 -->
+<section class="slide">
+ <div class="top">
+  <span class="eyebrow">КОЛО ДОOРУНДАГЫ МАДАНИЯТ</span>
+  <span class="tag">06 / 07</span>
+ </div>
+ <h2 class="reveal">Андрон маданияты жана <span class="gold">петроглифтер</span></h2>
+ <div class="layout">
+  <div class="reveal d1">
+   <h3>Андрон маданияты</h3>
+   <p>Коло доорунда Борбордук Азияда жана ага чектеш аймактарда тараган археологиялык маданият.</p>
+   <p>Анын өкүлдөрү мал чарбачылыгы, дыйканчылык жана металл иштетүү менен алектенишкен.</p>
+   <h3 style="margin-top:25px">Саймалуу-Таш</h3>
+   <p>Кыргызстандагы белгилүү петроглифтер жайгашкан жер. Аска беттерине адамдардын, жаныбарлардын жана турмуштук көрүнүштөрдүн сүрөттөрү чегилген.</p>
+   <div class="box">
+    <p><b class="gold">Петроглиф</b> — ташка же аскага чегилип тартылган байыркы сүрөт.</p>
+   </div>
+  </div>
+  <div class="reveal d2">
+   <img class="photo" style="height:370px" src="https://images.unsplash.com/photo-1500534623283-312aade485b7?w=900" alt="Аска жана тоолор">
+   <div class="caption">БАЙЫРКЫ АСКАЛАРДЫН КӨРҮНҮШҮ</div>
+  </div>
+ </div>
+</section>
+
+<!-- СЛАЙД 7 -->
+<section class="slide">
+ <div class="final">
+  <div class="eyebrow reveal">ЖЫЙЫНТЫК</div>
+  <h2 class="reveal d1">БАЙЫРКЫ ТАРЫХ — <span class="gold">БИЗДИН МУРАС</span></h2>
+  <p class="reveal d2">Таш доорунда адамдар жөнөкөй таш куралдар менен жашап, аңчылык жана жыйноочулук кылышкан.</p>
+  <p class="reveal d3">Коло доорунда металл иштетүү, мал чарбачылыгы жана кол өнөрчүлүк өнүккөн.</p>
+  <div class="box reveal d3">
+   <p class="bigquote">Бул доорлор Кыргызстандын байыркы тарыхынын маанилүү бөлүгү болуп саналат.</p>
+  </div>
+  <div class="thanks reveal d4">КӨҢҮЛ БУРГАНЫҢЫЗДАРГА РАХМАТ!</div>
+ </div>
+</section>
+
+<div class="hint">← → БАШКАРУУ</div>
+<div class="nav">
+ <span class="counter" id="counter">01 / 07</span>
+ <div class="track"><div class="fill" id="fill"></div></div>
+ <div class="controls">
+  <button onclick="prev()">←</button>
+  <button onclick="next()">→</button>
+ </div>
+</div>
+</div>
+
+<script>
+const slides=document.querySelectorAll('.slide');
+const fill=document.getElementById('fill');
+const counter=document.getElementById('counter');
+let current=0;
+
+function show(n){
+ current=Math.max(0,Math.min(n,slides.length-1));
+ slides.forEach((s,i)=>{
+  s.classList.remove('active');
+  if(i===current){
+   void s.offsetWidth;
+   s.classList.add('active');
+  }
+ });
+ fill.style.width=((current+1)/slides.length*100)+'%';
+ counter.textContent=String(current+1).padStart(2,'0')+' / 07';
+}
+function next(){show(current+1)}
+function prev(){show(current-1)}
+
+document.addEventListener('keydown',e=>{
+ if(e.key==='ArrowRight'||e.key===' '){
+  e.preventDefault();next();
+ }
+ if(e.key==='ArrowLeft')prev();
+ if(e.key==='Home')show(0);
+ if(e.key==='End')show(6);
+});
+
+let startX=0;
+document.addEventListener('touchstart',e=>{
+ startX=e.touches[0].clientX;
+});
+document.addEventListener('touchend',e=>{
+ let dx=e.changedTouches[0].clientX-startX;
+ if(Math.abs(dx)>65)dx<0?next():prev();
+});
+show(0);
+</script>
+</body>
+</html>
